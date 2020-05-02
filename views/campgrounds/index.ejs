@@ -1,0 +1,39 @@
+<%- include("../Partials/header") %>
+<div class =heading>
+<div class="container">
+    <header class = "jumbotron">
+        <div>
+            <h1>Welcome to YelpCamp CampGrounds</h1>
+            <p>-One of the best camping sites present</p>
+            <p> 
+                <a class="btn btn-primary btn-mid" href ="/campgrounds/new">New CampGrounds</a>
+            </p>
+            </div>
+    </header>
+    </div>
+<div class="container">
+<div class ="col-mid-12" style="text-align: center"><% if(noMatch !== null){%>
+    <h3><%= noMatch %></h3>
+    <form action="/campgrounds" method="GET" style ="margin:auto;max-width:200px;" >
+            <div class="form-group">
+                <input id="search"  type="text" placeholder="Search Camp" name="Search" class="form-control">
+            </div>
+    </form>
+    <% } %>
+</div>
+<div class="row" style="display:flex; flex-wrap: wrap">
+<% campgrounds.forEach(function(campground){  %>
+    <div class= "col-sm-6 col-xs-12 col-md-4 photo">
+        <div class="img-thumbnail">
+            <img src="<%= campground.image %>">
+            <div class="caption">
+                <h4 class="names"> <%= campground.name %> </h4>
+            </div>
+            <p class="info">
+                <a href="campgrounds/<%= campground._id %>" class="btn btn-primary btn-sm">More Info</a>
+            </p>
+        </div> 
+    </div>
+<% }); %>
+</div>
+<%- include("../Partials/footer") %>

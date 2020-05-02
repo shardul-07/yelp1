@@ -1,0 +1,56 @@
+var mongoose = require("mongoose");
+var Campground = require("./models/ground.js");
+var Comment = require("./models/Comment.js");
+var data = [
+    {
+        name: "Hill Green",
+        image: "https://images.unsplash.com/photo-1492648272180-61e45a8d98a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+        description: "blah blah blah"
+    },
+    {
+        name: "Mountain Snow",
+        image: "https://images.unsplash.com/photo-1491555103944-7c647fd857e6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+        description: "blah blah blah"
+    },
+    {
+        name: "Hill Top",
+        image: "https://images.unsplash.com/photo-1438786657495-640937046d18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+        description: "blah blah blah"
+    },
+]
+function seedDB(){
+    Campground.remove({}, function(err){
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log("removed campgrounds");
+        }
+        data.forEach(function(seed){
+            Campground.create(seed, function(err,campground){
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    console.log("added a new Database");
+                    Comment.create(
+                        {
+                            text: "This place is great wish there was internet",
+                            author: "Homer"
+                        },function(err, comment){
+                            if(err){
+                                console.log(err);
+                            }
+                            else{
+                            campground.comments.push(comment);
+                            campground.save();
+                            console.log("Created New Comment");
+                            }
+                        })
+                }
+            })
+        })
+    });
+}
+
+module.exports = seedDB;

@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+    <head>
+        <title>YelpCamp</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lobster&family=Merriweather&family=PT+Serif&family=Pacifico&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+        <style type="text/css">
+        #flash{
+            margin-top: 70px;
+        }
+        nav{
+                font-family: 'PT Serif', serif;
+                font-family: 'PT Serif', serif;
+                font-family: 'Lobster', cursive;
+                font-family: 'Merriweather', serif;
+                font-family: 'Pacifico', cursive;
+                font-family: 'Dancing Script', cursive;
+                word-spacing: 0.5em;
+                font-size: 1em;
+            }
+        .nav-item{
+            color: white;
+        }
+        body{
+            font-family: 'PT Serif', serif;
+                font-family: 'PT Serif', serif;
+                font-family: 'Lobster', cursive;
+                font-family: 'Merriweather', serif;
+                font-family: 'Pacifico', cursive;
+                font-family: 'Dancing Script', cursive;
+                word-spacing: 0.5em;
+                font-size: 1em;
+        }
+                    .bar1, .bar2, .bar3 {
+                width: 25px;
+                height: 3px;
+                background-color:white;
+                margin: 5px 0;
+                transition: 0.4s;
+            }
+            
+            .change .bar1 {
+                -webkit-transform: rotate(-45deg) translate(-7px, 6px) ;
+                transform: rotate(-45deg) translate(-7px, 6px) ;
+            }
+            
+            .change .bar2 {
+                opacity: 0;
+            }
+            .change .bar3 {
+                -webkit-transform: rotate(45deg) translate(-6px, -6px) ;
+                transform: rotate(45deg) translate(-6px, -6px) ;
+            }
+             .navbar-brand{
+    font-family: 'Nunito', sans-serif;
+    font-weight: 100;
+}
+  #search {
+    width: 150px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    color: #ccc;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    font-family: 'Nunito', sans-serif;
+    background-color: transparent;
+  }
+  #search:focus {
+    width: 100%;
+  }
+        </style>
+    </head>
+    <body>
+     <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top" id="nav">
+            <div class="container-fluid">
+                <a href="/" class="navbar-brand" id="brand">YelpCamp</a>
+                    <div class="navbar-toggler" data-toggle="collapse" type="menu" data-target="#f" id="menu" aria-controls="f" aria-expanded="false" aria-label="Toggle navigation"  onclick="myFunction(this)">
+                            <div class="bar1"></div>
+                            <div class="bar2"></div>
+                            <div class="bar3"></div>
+                    </div>
+                <div class="collapse navbar-collapse" id="f">
+                    <ul class="navbar-nav ml-lg-auto">
+                              <li class="nav-item"><form action="/campgrounds" method="GET" style ="margin:auto;max-width:300px;" >
+                                <div class="form-group">
+                                    <input id="search"  type="text" placeholder="Search Camp" name="Search" class="form-control">
+                                </div>
+                            </form></li>
+                         <li class="nav-item"><a class="nav-link" href="/campgrounds">Home</a></li>
+                         <%if(!currentUser){%>
+                            <li class="nav-item"><a class="nav-link" href="/register">Sign-Up</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/login">Log-In</a></li>
+                        <%}else{%>
+                            <li class="nav-item"><a class="nav-link" href="/logout" class="nav-link">Log-Out</a></li>
+                        <%}%>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+ <% if(error && error.length>0){%>
+                <h5 class="alert alert-danger" id="flash"><%= error %></h5>
+            <% } %>
+            <% if(success && success.length>0){%>        
+                <h5 class="alert alert-success" id="flash"><%= success %></h5>
+            <% } %>       
+        </div>
+<div class="container">
+    <br>
+    <br>
+    <h1 id="flash" style="text-align:center">EDIT Campgrounds</h1>
+        <div  style ="width: 30%; margin: 25px auto "> 
+            <form class="form" action="/campgrounds/<%= campground._id%>/?_method=PUT" method="POST">
+            <div class="form-group">
+                 <label><strong>Name:</strong></label><br>
+                <input class="form-control" type="text" name="campground[name]" value="<%= campground.name%>">
+            </div>
+            <div class="form-group">
+                 <label><strong>Image:</strong></label><br>
+                <input class="form-control" type="text" name="campground[image]" value="<%= campground.image%>">
+            </div>
+            <div class="form-group">
+                 <label><strong>Price:</strong></label><br>
+                <input class="form-control" type="number" name="campground[price]" value="<%= campground.price%>" min="0.1" step="0.1">
+            </div>
+            <div class="form-group">
+                 <label><strong>Description:</strong></label><br>
+                <input class="form-control" type="text" name="campground[description]" value="<%= campground.description%>">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-mid btn-primary btn-block">Submit</button>
+            </div>
+            </form>
+            <a href="/campgrounds" class="btn btn-mid btn-warning btn-block"> GO-back </a>
+        </div>
+    
+</div>
+<script>
+                   function myFunction(x) {
+  x.classList.toggle("change");
+}
+</script>
+<%- include("../Partials/footer") %>

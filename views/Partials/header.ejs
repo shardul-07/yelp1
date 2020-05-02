@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+        <title>YelpCamp</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link type="text/css" rel="stylesheet" href="main.css">
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lobster&family=Merriweather&family=PT+Serif&family=Pacifico&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top" id="nav">
+            <div class="container">
+                <a href="/" class="navbar-brand" id="brand">YelpCamp</a>
+                    <div class="navbar-toggler" data-toggle="collapse" type="menu" data-target="#f" id="menu" aria-controls="f" aria-expanded="false" aria-label="Toggle navigation"  onclick="myFunction(this)">
+                             <div class="bar1"></div>
+                            <div class="bar2"></div>
+                            <div class="bar3"></div>
+                    </div>
+                <div class="collapse navbar-collapse" id="f">
+                    <ul class="navbar-nav ml-lg-auto">
+                    <li class="nav-item"><form action="/campgrounds" method="GET" style ="margin:auto;max-width:300px;" >
+                                <div class="form-group">
+                                    <input id="search"  type="text" placeholder="Search Camp" name="Search" class="form-control">
+                                </div>
+                            </form></li>
+                             <li class="nav-item"><a class="nav-link" href="/campgrounds">Home</a></li>
+                         <%if(!currentUser){%>
+                            <li class="nav-item"><a class="nav-link" href="/register">Sign-UP</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/login">Log-IN</a></li>
+                        <%}else{%>
+                            <li class="nav-item"><a class="nav-link" href="/logout" class="nav-link">Log-Out</a></li>
+                        <%}%>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+            <% if(error && error.length>0){%>
+                <h5 class="alert alert-danger" id="flash"><%= error %></h5>
+            <% } %>
+            <% if(success && success.length>0){%>        
+                <h5 class="alert alert-success" id="flash"><%= success %></h5>
+            <% } %>       
+            <script>
+               
+                   function myFunction(x) {
+  x.classList.toggle("change");
+}
+                
+            </script>

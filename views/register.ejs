@@ -1,0 +1,48 @@
+<%- include("./Partials/header") %>
+<style>
+body{
+    background-image: url("https://images.unsplash.com/photo-1496080174650-637e3f22fa03?ixlib=rb-1.2.1&auto=format&fit=crop&w=1906&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    font-family: 'PT Serif', serif;
+    font-family: 'PT Serif', serif;
+    font-family: 'Lobster', cursive;
+    font-family: 'Merriweather', serif;
+    font-family: 'Pacifico', cursive;
+    font-family: 'Dancing Script', cursive;
+    word-spacing: 0.5em;
+}
+nav{
+    style="font-size: 1em;"
+}
+</style>
+    <div class="row" id="login" style="font-size: 1.2em;">
+        <div class="col-md-5 d-none d-md-block">
+              <div id="camp" >
+                <div class="login-info">
+                    <h3>YelpCamp</h3>
+                    <p>Join the YelpCamp Family.<br>Camping is an outdoor activity involving overnight stays away from home in a shelter, such as a tent or a recreational vehicle. Typically participants leave developed areas to spend time outdoors in more natural ones in pursuit of activities providing them enjoyment. To be regarded as "camping" a minimum of one night is spent outdoors, distinguishing it from day-tripping, picnicking, and other similarly short-term recreational activities. Camping can be enjoyed through all four seasons.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 cpl-sm-12">
+            <div  style ="width: 12%; margin: 25px auto "> 
+                <h1 class="top">SignUp</h1>
+                    <form class="form" action ="/register" method="post">
+                        <div class="form-group">
+                             <label><strong>Create-Username:</strong></label><br>
+                            <input type="text" name= "username" placeholder="username">
+                        </div>
+                        <div class="form-group">
+                             <label><strong>Create-Password:</strong></label><br>
+                            <input type="Password" name="password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-sm btn-primary btn-block">Sign-UP</button>
+                        </div>
+                    </form> 
+            </div>
+        </div>
+    </div>
+<%- include("./Partials/footer") %>

@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+    <head>
+        <title>YelpCamp</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lobster&family=Merriweather&family=PT+Serif&family=Pacifico&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+
+        <style type="text/css">
+            .img-thumbnail img{
+                width :100%;
+            }
+            .img-thumbnail{
+                padding: 0 ;
+            }
+            .img-thumbnail .caption-full{
+                padding: 10px;
+            }
+            .text-right{
+                margin-left: 400px;
+            }
+            .nav-item{
+                padding-right: 20px;
+                padding-left: 5px;
+            }
+            .jumbotron{
+                padding-top: 10px;
+                margin-top: 20px; 
+            }
+            nav{
+                margin-bottom : 1000px;
+            }
+            .container{
+                margin-top: 70px;
+            }
+            #delete{
+                display: inline;
+            }
+            .nav-link{
+                color : white;
+            }
+            #flash{
+                margin-top: 50px;
+            }
+            nav{
+                font-family: 'PT Serif', serif;
+                font-family: 'PT Serif', serif;
+                font-family: 'Lobster', cursive;
+                font-family: 'Merriweather', serif;
+                font-family: 'Pacifico', cursive;
+                font-family: 'Dancing Script', cursive;
+                word-spacing: 0.5em;
+                font-size: 1em;
+            }
+            #delete{
+                display:inline;
+            }
+            #map{
+                height: 400px;
+                width: 100%;
+            }
+            .navbar-brand{
+    font-family: 'Nunito', sans-serif;
+    font-weight: 100;
+}
+.bar1, .bar2, .bar3 {
+    width: 25px;
+    height: 3px;
+    background-color:white;
+    margin: 5px 0;
+    transition: 0.4s;
+  }
+  
+  .change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-7px, 6px) ;
+    transform: rotate(-45deg) translate(-7px, 6px) ;
+  }
+  
+  .change .bar2 {
+    opacity: 0;
+  }
+  .change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-6px, -6px) ;
+    transform: rotate(45deg) translate(-6px, -6px) ;
+  }
+    #search {
+    width: 150px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    color: #ccc;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    font-family: 'Nunito', sans-serif;
+    background-color: transparent;
+  }
+  #search:focus {
+    width: 100%;
+  }
+        </style>
+    </head>
+    <body>
+             <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top" id="nav">
+            <div class="container-fluid">
+                <a href="/" class="navbar-brand" id="brand">YelpCamp</a>
+                    <div class="navbar-toggler" data-toggle="collapse" type="menu" data-target="#f" id="menu" aria-controls="f" aria-expanded="false" aria-label="Toggle navigation"  onclick="myFunction(this)">
+                             <div class="bar1"></div>
+                            <div class="bar2"></div>
+                            <div class="bar3"></div>
+                    </div>
+                <div class="collapse navbar-collapse" id="f">
+                    <ul class="navbar-nav ml-lg-auto">
+                          <li class="nav-item"><form action="/campgrounds" method="GET" style ="margin:auto;max-width:300px;" >
+                                <div class="form-group">
+                                    <input id="search"  type="text" placeholder="Search Camp" name="Search" class="form-control">
+                                </div>
+                            </form></li>
+                        <li class="nav-item"><a class="nav-link" href="/campgrounds">Home</a></li>
+                         <%if(!currentUser){%>
+                            <li class="nav-item"><a class="nav-link" href="/register">Sign-Up</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/login">Log-In</a></li>
+                        <%}else{%>
+                            <li class="nav-item"><a class="nav-link" href="/logout" class="nav-link">Log-Out</a></li>
+                        <%}%>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+ <% if(error && error.length>0){%>
+                <h5 class="alert alert-danger" id="flash"><%= error %></h5>
+            <% } %>
+            <% if(success && success.length>0){%>        
+                <h5 class="alert alert-success" id="flash"><%= success %></h5>
+            <% } %>       
+<div class="container">
+    <div class="row"> 
+        <div class= "col-md-3 d-none d-md-block">
+            <p class="lead">YelpCamp</p>
+            <div class="list-group">
+                <li class="list-group-item active">Info 1</li> 
+                <li class="list-group-item">Info 2</li> 
+                <li class="list-group-item">Info 3</li> 
+            </div>
+            <div id="map"></div>
+        </div>
+        <div class="col-md-9 col-sm-12">
+            <div class="img-thumbnail">
+                <img class="img-responsive" src="<%= campground.image %>">
+                <div class="caption-full">
+                    <h3 class="name"><%= campground.name %><span class="text-right">$  /day</span></h3>
+                    <p><%= campground.description%></p>
+                    <p>Submitted By - <%= campground.author.username%></p>
+                    <% if (currentUser && campground.author.id.equals(currentUser._id)){%>
+                        <p><a class="btn btn-warning" href ="/campgrounds/<%= campground._id%>/edit">Edit Camp</a></p>
+                        <form action="/campgrounds/<%= campground._id%>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger">DELETE</button>
+                        </form>
+                    <% }%>
+                </div>
+            </div>
+            <div class="jumbotron">
+                <div class=text-right>
+                    <a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Leave comment</a>
+                </div>
+                <hr>
+                <% campground.comments.forEach(function(comment){ %>
+                <div class="row">
+                    <div class="col-md-12">
+                        <strong><%= comment.author.username %></strong>
+                        <p> - <%= comment.text %></p>
+                    <% if (currentUser && comment.author.id.equals(currentUser._id)){%>
+                        <a class="btn btn-sm btn-warning" href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit">Edit</a>
+                    <%}%>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function initMap() {
+  // The location of Uluru
+  var uluru = {lat: 42.3601, lng: -71.0589};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 4, center: uluru});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({
+      position: uluru, 
+      map: map
+      });
+        var contentString = `
+      <strong><%= campground.name %><br />
+      <%= campground.location %></strong>
+      <p><%= campground.description %></p>
+    `
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+     var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+}
+    </script>
+ <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOH4H76v4Ae47z_QtByDmDLM9qu87LMa4&callback=initMap">
+    </script>
+<script>
+                   function myFunction(x) {
+  x.classList.toggle("change");
+}
+</script>
+
+<%- include("../Partials/footer") %>
